@@ -9,9 +9,10 @@ var userData = require('../../api/models/userData');
 //var ObjectID = require('mongodb').ObjectID; // convert string to ObjectID
 
 var serviceTypeId;
+var tmpDbPassword;
 
 router.post('/users',function(req,res){
-	console.log("userdata from post",req.body);
+	console.log("userdata from post 2",req.body);
 	var userid=req.body.user.userid;
 	var username=req.body.user.username;
 	var password=req.body.user.password;
@@ -20,23 +21,74 @@ router.post('/users',function(req,res){
 	var image=req.body.user.image;
 	var about=req.body.user.about;
 
-	userData.create({
-		userId:userid,
-		userName:username,
-		password:password,
-		phoneNo:phonenum,
-		email:email,
-		image:image,
-		about:about
-	}).then(function(result){
-		console.log("db result",result);
-	}), function(err2) {
+	getUserData(userid)
+	.then(function(result){
+		console.log("getUserData final result",JSON.stringify(result));
+		console.log("getUserData final result 2:"+result[0]);
+		if (result[0]) {
+			console.log("user with userId:"+userid+
+				", already exists - db userid:"+result[0].userId);
+			res.send({inserted:false,
+				message:"user with userId:"+userid+
+				", already exists.. try to register with another user id"});
+		} else {
+			console.log("getUserData tmp");
+			userData.create({
+				userId:userid,
+				userName:username,
+				passWord:password,
+				phoneNo:phonenum,
+				email:email,
+				image:image,
+				about:about
+			}).then(function(result2){
+				console.log("db result 2 ",JSON.stringify(result2));
+				res.send({inserted:true,
+						dbId:result2._id,
+					message:"user with userId:"+userid+
+					" registered in the system"});
+		
+
+			}, function(err2) {
 				console.log("inside insertserviceType create err2:"+err2);
+						//reject("serviceTypes function  failed:"+err);
+				res.send({inserted:false,
+					message:"Error while inserting user with userId:"+
+					userid+",  err2:"+err2});
+		
+			}); // e
+		}
+
+	}, function(err3) {
+		console.log("inside /users getUserData  err3:"+err3);
 				//reject("serviceTypes function  failed:"+err);
-			}; // e
+	});
 
+	console.log("hello end from /users");
 
-})
+});
+
+function getUserData(useridParam){
+	console.log("inside getUserData useridParam:"+useridParam);
+
+	return new Promise( function( resolve, reject ) {
+		
+		userData.find({
+			userId:useridParam
+		}).then(function(result){
+			console.log("getUserData result",JSON.stringify(result));
+			// tmpDbPassword = 
+			resolve(result);
+
+		}), function(err2) {
+			console.log("inside getUserData  err2:"+err2);
+					//reject("serviceTypes function  failed:"+err);
+			reject("getUserData failed");
+		};
+
+	});
+
+} // end of - function getUserData
 
 router.get('/insertserviceType/:serviceName', 
 	(req, res) => {
@@ -59,7 +111,7 @@ router.get('/insertserviceType/:serviceName',
 				//reject("serviceTypes function  failed:"+err);
 			}); // end of - err - specializationData.create
 
-});
+}); // end of - router.get('/insertserviceType/:
 
 router.get('/serviceType/:serviceName', (req, res) => {
 	// http://localhost:3000/api/serviceType/tutoring
@@ -78,7 +130,7 @@ router.get('/serviceType/:serviceName', (req, res) => {
 		console.log("serviceTypes results:"+JSON.stringify(results));
 		res.json(results);
 	});
-});
+}); // end of - router.get('/serviceType/:servi
 
 router.get('/getSpecializations/:serviceName', (req, res) => {
 	// http://localhost:3000/api/getSpecializations/tutoring
@@ -118,9 +170,7 @@ router.get('/getSpecializations/:serviceName', (req, res) => {
 			//reject("serviceTypes function  failed:"+err);
 	}); // end of err - serviceTypes.find
 //});
-});
-
-
+}); // end of - router.get('/getSpecializations/:serviceNa
 
 router.get('/insertSplData/:serviceName/:specializationName', 
 	(req, res) => {
@@ -161,6 +211,6 @@ router.get('/insertSplData/:serviceName/:specializationName',
 			console.log("inside serviceTypes err:"+err);
 			//reject("serviceTypes function  failed:"+err);
 	}); // end of - err - serviceTypes.find
-});
+}); // end of - router.get('/insertSplData/:serviceName/:speciali
 
 module.exports = router;
