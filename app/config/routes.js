@@ -8,9 +8,6 @@ import SigninPage from '../components/signin/SigninPage'
 import RegisterPage from '../components/register/RegisterPage'
 import SearchPage from '../components/search/SearchPage'
 
-
-
-
 module.exports = (
   <Router history={browserHistory}>
     <Route path="/" component={Main}>

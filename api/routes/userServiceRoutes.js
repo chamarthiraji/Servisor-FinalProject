@@ -119,7 +119,7 @@ router.get('/serviceType/:serviceName', (req, res) => {
 	// my not be useful unless we need in the front end
 	console.log("inside /serviceType/:serviceName params:"+
 		JSON.stringify(req.params));
-	let tmpserviceName = req.params.serviceName.toLowerCase();
+	var tmpserviceName = req.params.serviceName.toLowerCase();
 	tmpserviceName = tmpserviceName.replace(/ /g, '');
 
 	serviceTypes.find({
@@ -136,7 +136,7 @@ router.get('/getSpecializations/:serviceName', (req, res) => {
 	// http://localhost:3000/api/getSpecializations/tutoring
 	console.log("inside /serviceType/:serviceName params:"+
 		JSON.stringify(req.params));
-	let tmpserviceName = req.params.serviceName.toLowerCase();
+	var tmpserviceName = req.params.serviceName.toLowerCase();
 	tmpserviceName = tmpserviceName.replace(/ /g, '');
 	var tmp;
 	// new Promise(function(resolve, reject) {
@@ -181,9 +181,9 @@ router.get('/insertSplData/:serviceName/:specializationName',
 	// 	http://localhost:3000/api/insertSplData/tutoring/social
 	console.log("inside insertSplData params:"+
 		JSON.stringify(req.params));
-	let tmpserviceName = req.params.serviceName.toLowerCase();
+	var tmpserviceName = req.params.serviceName.toLowerCase();
 	tmpserviceName = tmpserviceName.replace(/ /g, '');
-	let tmpSpecializationName = req.params.specializationName.toLowerCase();
+	var tmpSpecializationName = req.params.specializationName.toLowerCase();
 
 	serviceTypes.find({
 		//serviceName:"tutoring"
