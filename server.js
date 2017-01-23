@@ -64,8 +64,8 @@ app.use(bodyParser.json());
 
 const userServiceRoutes = require('./api/routes/userServiceRoutes');
 app.use('/api', userServiceRoutes);
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, './index.html'));
+app.get(`*`, function(req, res) {
+  res.sendFile('public/index.html', { root: __dirname });
 });
 
 

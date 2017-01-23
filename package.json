@@ -22,13 +22,17 @@
   },
   "dependencies": {
     "axios": "^0.15.3",
+    "bluebird": "^3.4.7",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "mongoose": "^4.7.6",
+    "morgan": "^1.7.0",
     "path": "^0.12.7",
     "querystring": "^0.2.0",
     "react": "^15.1.0",
+    "react-cookie": "^1.0.4",
     "react-dom": "^15.1.0",
+    "react-facebook-login": "^3.4.3",
     "react-router": "^3.0.0"
   }
 }
