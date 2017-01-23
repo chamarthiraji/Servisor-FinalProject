@@ -1,5 +1,6 @@
 import React,{Component} from 'react'
 import { Link }  from 'react-router';
+import SearchPage from '../components/search/SearchPage'
 
 
 export default class FirstPage extends Component {
@@ -8,6 +9,7 @@ export default class FirstPage extends Component {
 		return(
 			<div className="jumbotron">
 				<h2>Welcome!!</h2>
+				<Link to="/searchPage">Search</Link>
     		</div>
 			);
 	}

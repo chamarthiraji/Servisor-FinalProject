@@ -8,6 +8,9 @@ var userDataSchema = new Schema({
     userId:{
     	type:String    	
 	},
+    passWord:{
+        type:String     
+    },
     userName:{
         type:String     
     },
