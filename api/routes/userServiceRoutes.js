@@ -69,6 +69,21 @@ router.post('/users', function(req,res){
 
 });
 
+//inserting data into "serviceProviders" Schema
+router.post('/serviceproviders',function(req,res){
+	console.log("serviceproviders req.body",req.body);
+	var serviceName = req.body.services.serviceType;
+	var specializationName = req.body.services.specializationName;
+	var user_id = req.body.services.user_id;
+	serviceProviders.create({
+		serviceName:serviceName,
+		specializationName:specializationName,
+		user_id:user_id
+	});
+});
+
+
+
 function getUserData(useridParam){
 	// console.log("inside getUserData useridParam:"+useridParam);
 

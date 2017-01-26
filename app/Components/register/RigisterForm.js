@@ -51,9 +51,10 @@ export default class RigisterForm extends Component {
 			}
 			*/
 			tmpUserRegisteredStatus = result.data.inserted;
-			tmpUserRegisteredMsg = result.data.message;
-			tmpmongoId = result.data.dbId;
-			x.setUserRegisteredState();
+ 			tmpUserRegisteredMsg = result.data.message;
+ 			tmpmongoId = result.data.dbId;
+ 			x.setUserRegisteredState();
+
 		}, function(err2) {
 			// console.log("api/users call  err2:"+err2);
 		}); // e;
@@ -177,8 +178,6 @@ export default class RigisterForm extends Component {
 								Register
 							</button>
 						</div>
-
-
 					</form>
 				}
 			</div>

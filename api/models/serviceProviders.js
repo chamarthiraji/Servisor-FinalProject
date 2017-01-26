@@ -6,14 +6,18 @@ var Schema = mongoose.Schema;
 
 var serviceProvidersSchema = new Schema({
     
-    specialization_data_id :{
-        type: Schema.Types.ObjectId,
-        ref:"specializationData"
+    serviceName:{
+            type:String
+        
+    },
+    specializationName:{
+        type:String
     },
     user_id :{
-		type:String
-		
-	},
+        type:Schema.Types.ObjectId,
+        ref:"userData"
+        
+    },
     rating: {
     	type:"string"
 
