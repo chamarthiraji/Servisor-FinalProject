@@ -12,7 +12,7 @@ var Promise = require("bluebird");
 mongoose.Promise = Promise;
 
 var serviceTypes = require('./api/models/serviceTypes');
-var specializationData = require('./api/models/specializationData');
+//var specializationData = require('./api/models/specializationData');
 var serviceProviders = require('./api/models/serviceProviders');
 var userData = require('./api/models/userData');
 

@@ -7,6 +7,8 @@ import FirstPage from '../components/FirstPage';
 import SigninPage from '../components/signin/SigninPage'
 import RegisterPage from '../components/register/RegisterPage'
 import SearchPage from '../components/search/SearchPage'
+import ProvidersPage from '../components/search/ProvidersPage'
+
 
 module.exports = (
   <Router history={browserHistory}>
@@ -15,6 +17,7 @@ module.exports = (
   	<Route path="signin" component={SigninPage} />
   	<Route path="register" component={RegisterPage} />
   	<Route path="searchPage" component={SearchPage} />
+  	<Route path="providersdata" component={ProvidersPage}/>
   	
     </Route>
   </Router>

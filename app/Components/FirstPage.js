@@ -10,6 +10,7 @@ export default class FirstPage extends Component {
 			<div className="jumbotron">
 				<h2>Welcome!!</h2>
 				<Link to="/searchPage">Search</Link>
+				<Link to="/providersdata">Browse for Providers</Link>
     		</div>
 			);
 	}
