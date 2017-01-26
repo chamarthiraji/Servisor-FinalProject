@@ -58,31 +58,6 @@ router.post('/users', function(req,res){
 			}); // e)
     });
 });
-			// // console.log("getUserData tmp");
-			// userData.create({
-			// 	userId:userid,
-			// 	userName:username,
-			// 	passWord:password,
-			// 	phoneNo:phonenum,
-			// 	email:email,
-			// 	image:image,
-			// 	about:about
-			// }).then(function(result2){
-			// 	// console.log("db result 2 ",JSON.stringify(result2));
-			// 	res.send({inserted:true,
-			// 			dbId:result2._id,
-			// 		message:"user with userId:"+userid+
-			// 		" registered in the system"});
-
-
-			// }, function(err2) {
-			// 	// console.log("inside insertserviceType create err2:"+err2);
-			// 			//reject("serviceTypes function  failed:"+err);
-			// 	res.send({inserted:false,
-			// 		message:"Error while inserting user with userId:"+
-			// 		userid+",  err2:"+err2});
-
-			// }); // e
 		}
 
 	}, function(err3) {
