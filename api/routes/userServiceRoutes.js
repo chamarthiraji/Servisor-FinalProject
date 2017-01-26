@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 var serviceTypes = require('../../api/models/serviceTypes');
-var specializationData = require('../../api/models/specializationData');
+//var specializationData = require('../../api/models/specializationData');
 var serviceProviders = require('../../api/models/serviceProviders');
 var userData = require('../../api/models/userData');
 var bcrypt = require('bcryptjs');
@@ -228,5 +228,25 @@ router.get('/insertSplData/:serviceName/:specializationName',
 			//reject("serviceTypes function  failed:"+err);
 	}); // end of - err - serviceTypes.find
 }); // end of - router.get('/insertSplData/:serviceName/:speciali
+
+//getting data from serviceproviders collection
+router.get('/:serviceName',function(req,res){
+
+	console.log("router get",req.params);
+    var serviceName = req.params.serviceName.toLowerCase();
+	serviceName = serviceName.replace(/ /g, '');
+
+	serviceProviders.find({
+		serviceName:serviceName
+		
+	}, (err, results) => {
+		//console.log("results",results);
+		console.log("err",err);
+		res.json(results);
+	});
+});
+
+
+>>>>>>> Stashed changes
 
 module.exports = router;
