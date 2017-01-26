@@ -22,10 +22,12 @@ export default class RigisterForm extends Component {
 			userRegisteredMsg:'',
 			mongoId:undefined
 		}
+
 		this.onChange = this.onChange.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
     	this.setUserRegisteredState = this.setUserRegisteredState.bind(this);
 	}
+
 	onChange(e){
 		this.setState({ [e.target.name]:e.target.value});
 		// console.log('state', this.state);
@@ -58,7 +60,6 @@ export default class RigisterForm extends Component {
 		}); // e;
 	}
 
-
 	setUserRegisteredState() {
 		// console.log("hello setUserRegisteredState");
 		var newState = this.state;
@@ -74,7 +75,6 @@ export default class RigisterForm extends Component {
 
 	render() {
 		return(
-
 			<div>
 				{ this.state.userRegisteredStatus === false &&
 					<div className="form-group">
