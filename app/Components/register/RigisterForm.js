@@ -21,8 +21,6 @@ export default class RigisterForm extends Component {
 			userRegisteredStatus:undefined,
 			userRegisteredMsg:'',
 			mongoId:undefined
-
-
 		}
 		this.onChange = this.onChange.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
