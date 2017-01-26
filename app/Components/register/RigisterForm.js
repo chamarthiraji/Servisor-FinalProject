@@ -1,6 +1,5 @@
 import React,{Component} from 'react';
 import axios from 'axios';
-
 import SearchPage from '../search/SearchPage';
 
 var tmpUserRegisteredStatus;
@@ -31,18 +30,19 @@ export default class RigisterForm extends Component {
 	}
 	onChange(e){
 		this.setState({ [e.target.name]:e.target.value});
-
+		// console.log('state', this.state);
 	}
 
 
 	onSubmit(e) {
 		e.preventDefault();
-		console.log("hi user input data: ",this.state);
+		// console.log("hi user input data: ",this.state);
 		var x = this;
 		axios.post('api/users',{user:this.state})
 		.then(function(result){
-			console.log("api/users hi call result 2 2 ",JSON.stringify(result));
-			console.log("api/users call result 2 2 ",result.data.inserted);
+			// console.log('result', result)
+			// console.log("api/users hi call result 2 2 ",JSON.stringify(result));
+			// console.log("api/users call result 2 2 ",result.data.inserted);
 			/*
 			if (result.data.inserted) {
 				tmpUserRegisteredStatus = true;
@@ -55,32 +55,33 @@ export default class RigisterForm extends Component {
 			tmpmongoId = result.data.dbId;
 			x.setUserRegisteredState();
 		}, function(err2) {
-			console.log("api/users call  err2:"+err2);
+			// console.log("api/users call  err2:"+err2);
 		}); // e;
 	}
 
 
 	setUserRegisteredState() {
-		console.log("hello setUserRegisteredState");
+		// console.log("hello setUserRegisteredState");
 		var newState = this.state;
+		// console.log('state', newState);
 		newState["userRegisteredStatus"]=tmpUserRegisteredStatus;
 		newState["userRegisteredMsg"] = tmpUserRegisteredMsg;
 		newState["mongoId"] = tmpmongoId;
 		this.setState(newState);
 	    // this.setState({tmpUserRegisteredStatus:userRegisteredStatus});
-	    console.log(" setUserRegisteredState this state:"+
-				this.state.tmpUserRegisteredStatus);
+	    // console.log(" setUserRegisteredState this state:"+
+				// this.state.tmpUserRegisteredStatus);
 	}
 
 	render() {
 		return(
-			
+
 			<div>
 				{ this.state.userRegisteredStatus === false &&
 					<div className="form-group">
 					 User already exists hello .
 					 { this.state.userRegisteredMsg }
-					 
+
 					</div>
 				}
 
@@ -179,8 +180,8 @@ export default class RigisterForm extends Component {
 
 
 					</form>
-				}	
+				}
 			</div>
 		);
 	}
-} 
+}
