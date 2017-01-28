@@ -1,26 +1,23 @@
 //Require mongoose
 var mongoose = require("mongoose");
+
 //Create Schema class
 var Schema = mongoose.Schema;
-
 
 var serviceProvidersSchema = new Schema({
     
     serviceName:{
             type:String
-        
     },
     specializationName:{
         type:String
     },
-    user_id :{
-        type:Schema.Types.ObjectId,
+    userDataRefId :{
+        type: Schema.ObjectId,
         ref:"userData"
-        
     },
     rating: {
-    	type:"string"
-
+        type:"string"
     }
   
 });

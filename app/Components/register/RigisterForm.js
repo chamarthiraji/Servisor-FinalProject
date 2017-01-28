@@ -41,15 +41,7 @@ export default class RigisterForm extends Component {
 		axios.post('api/users',{user:this.state})
 		.then(function(result){
 			// console.log('result', result)
-			// console.log("api/users hi call result 2 2 ",JSON.stringify(result));
-			// console.log("api/users call result 2 2 ",result.data.inserted);
-			/*
-			if (result.data.inserted) {
-				tmpUserRegisteredStatus = true;
-			} else {
-				tmpUserRegisteredStatus = false;
-			}
-			*/
+			
 			tmpUserRegisteredStatus = result.data.inserted;
  			tmpUserRegisteredMsg = result.data.message;
  			tmpmongoId = result.data.dbId;
@@ -57,7 +49,7 @@ export default class RigisterForm extends Component {
 
 		}, function(err2) {
 			// console.log("api/users call  err2:"+err2);
-		}); // e;
+		}); 
 	}
 
 	setUserRegisteredState() {
@@ -68,9 +60,6 @@ export default class RigisterForm extends Component {
 		newState["userRegisteredMsg"] = tmpUserRegisteredMsg;
 		newState["mongoId"] = tmpmongoId;
 		this.setState(newState);
-	    // this.setState({tmpUserRegisteredStatus:userRegisteredStatus});
-	    // console.log(" setUserRegisteredState this state:"+
-				// this.state.tmpUserRegisteredStatus);
 	}
 
 	render() {

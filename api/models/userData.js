@@ -1,8 +1,8 @@
 //Require mongoose
 var mongoose = require("mongoose");
+
 //Create Schema class
 var Schema = mongoose.Schema;
-
 
 var userDataSchema = new Schema({
     userId:{
@@ -16,7 +16,6 @@ var userDataSchema = new Schema({
     },
     phoneNo :{
 		type:String
-		
 	},
     email:{
         type:String
@@ -26,8 +25,7 @@ var userDataSchema = new Schema({
     },
     image:{
         type:String
-    }   
-  
+    }
 });
 
 //here we are creating serviceProviders model using serviceProvidersSchema schema

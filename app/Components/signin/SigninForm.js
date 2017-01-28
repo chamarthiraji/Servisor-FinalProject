@@ -64,9 +64,7 @@ export default class SigninForm extends Component {
 						sign up
 					</button>
 				</div>
-
-
 			</form>
-			);
+		);
 	}
 }

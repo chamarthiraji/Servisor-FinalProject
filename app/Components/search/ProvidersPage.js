@@ -1,46 +1,41 @@
 import React,{Component} from 'react'
 import axios from 'axios'
 
+import ProvidersListPage from './ProvidersListPage'
+
 export default class ProvidersPage extends Component {
 
-	constructor(){
-			super();
+	constructor(props){
+			super(props);
+			console.log("ProvidersPage props",JSON.stringify(props.params));
 			this.state = {
-			providers: []
-		}
-		
+				providers: []
+			}
 	}
 
 	componentDidMount() {
 		console.log("inside componentDidMount");
-
+		console.log("serviceName:"+this.props.params.serviceName);
 		
-		axios.get('/api/' + this.state.serviceName).then(
+		axios.get('/api/providers/' + this.props.params.serviceName).then(
 			providers => {
-				console.log("providers data",providers.data); 
-
-
+				console.log("providers data",providers.data);
 				this.setState({ providers: providers.data });
-			});
+			}
+		);
 	} 
 
 	render() {
 		return(
 			<div className="jumbotron">
 				<ul>
-				{this.state.providers.map(function(provider){
-					return (
-						<div key={provider.id} className="provider">
-							{provider.serviceName}
-						</div>
-						)
-				}
-				)}
-
-				 
+					{this.state.providers.map(provider =>
+					  <ProvidersListPage key={provider._id} provider={provider}/>
+					
+					)}
 				</ul>
     		</div>
-			);
+		);
 	}
 
 }	
