@@ -1,7 +1,7 @@
 import React,{Component} from 'react'
 import SigninForm from './SigninForm'
+
 export default class SigninPage extends Component {
-	
 	render() {
 		return(
 			<div className="row">
@@ -9,6 +9,6 @@ export default class SigninPage extends Component {
 					<SigninForm />
 				</div>
 			</div>
-			);
-		}
-	}				
+		);
+	}
+}				

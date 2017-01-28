@@ -9,33 +9,26 @@ export default class SearchPage extends Component {
 			this.state = {
 				serviceType : "",
 				specializationName:""
-
 			}
-		this.state["user_id"] = props.data;	
+		this.state["userDataRefId"] = props.data;	
 		this.onChange = this.onChange.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
 	}
+
 	onChange(e){
 		this.setState({ [e.target.name]:e.target.value});
-
 	}
-
 
 	onSubmit(e) {
 		e.preventDefault();
-		console.log("hi user input data: ",this.state);
-		//var x = this;
+		//console.log("hi user input data: ",this.state);
 		axios.post('api/serviceproviders',{services:this.state})
 		.then(function(result){
-			console.log("axios serviceproviders ",JSON.stringify(result));
-			console.log("axios serviceproviders ",result.data.inserted);
-			
+			//console.log("axios serviceproviders ",JSON.stringify(result));
 		}, function(err2) {
 			console.log("api/users call  err2:"+err2);
-		}); // e;
+		});
 	}
-
-
 	
 	render(){
 
@@ -72,6 +65,6 @@ export default class SearchPage extends Component {
 				</form>
 
 			</div>
-			);
+		);
 	}	
 }
