@@ -3,7 +3,6 @@ var mongoose = require("mongoose");
 //Create Schema class
 var Schema = mongoose.Schema;
 
-
 var serviceTypesSchema = new Schema({
 
 	serviceName: {
