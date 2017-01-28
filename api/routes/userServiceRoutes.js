@@ -2,12 +2,11 @@ const express = require('express');
 const router = express.Router();
 
 var serviceTypes = require('../../api/models/serviceTypes');
-//var specializationData = require('../../api/models/specializationData');
 var serviceProviders = require('../../api/models/serviceProviders');
 var userData = require('../../api/models/userData');
 var bcrypt = require('bcryptjs');
 
-//var ObjectID = require('mongodb').ObjectID; // convert string to ObjectID
+//var {ObjectId} = require('mongodb'); // or ObjectID
 
 var serviceTypeId;
 var tmpDbPassword;
@@ -53,40 +52,41 @@ router.post('/users', function(req,res){
 
 		} else {
 			bcrypt.genSalt(10, function(err, salt) {
-    		bcrypt.hash(password, salt, function(err, hash) {
-        	userData.create({
-        		userId:userid,
+    			bcrypt.hash(password, salt, 
+    			function(err, hash) {
+		        	userData.create({
+		        		userId:userid,
 						userName:username,
 						passWord:hash,
 						phoneNo:phonenum,
 						email:email,
 						image:image,
 						about:about
-        	}).then(function(result2) {
-        		res.send({inserted:true,
-						dbId:result2._id,
-						message:"user with userId:"+userid+
-						" registered in the system"});
-        	}, function(err2) {
-				// console.log("inside insertserviceType create err2:"+err2);
-						//reject("serviceTypes function  failed:"+err);
-				res.send({inserted:false,
-					message:"Error while inserting user with userId:"+
-					userid+",  err2:"+err2});
-
-			}); // e)
-    });
-});
+	        		}).then(function(result2) {
+		        		res.send({inserted:true,
+								dbId:result2._id,
+								message:"user with userId:"+userid+
+								" registered in the system"
+							});
+		        	}, function(err2) {
+							// console.log("inside insertserviceType create err2:"+err2);
+							//reject("serviceTypes function  failed:"+err);
+							res.send({inserted:false,
+								message:"Error while inserting user with userId:"+
+								userid+",  err2:"+err2
+							});
+					}); 
+    			});
+			});
 		}
-
-	}, function(err3) {
-		// console.log("inside /users getUserData  err3:"+err3);
+		// end of getUserData.then				
+	},
+	function(err3) {
+		console.log("inside /users getUserData  err3:"+err3);
 				//reject("serviceTypes function  failed:"+err);
 	});
 
-	// console.log("hello end from /users");
-
-});
+});// end of users
 
 // function findExistingUser() {
 // 	router.get('/existingUser/:username', function(req, res) {
@@ -102,21 +102,29 @@ router.post('/users', function(req,res){
 
 //inserting data into "serviceProviders" Schema
 router.post('/serviceproviders',function(req,res){
-	console.log("serviceproviders req.body",req.body);
-	var serviceName = req.body.services.serviceType;
-	var specializationName = req.body.services.specializationName;
-	var user_id = req.body.services.user_id;
+	console.log("serviceproviders 2 req.body",req.body);
+	var tmpServiceName = req.body.services.serviceType;
+	var tmpSpecializationName = req.body.services.specializationName;
+	var tmpUserData2_id = req.body.services.userDataRefId;
+
 	serviceProviders.create({
-		serviceName:serviceName,
-		specializationName:specializationName,
-		user_id:user_id
-	});
+		serviceName:tmpServiceName,
+		userDataRefId:tmpUserData2_id,
+		specializationName:tmpSpecializationName,
+		rating:"high"
+	}).then(function(result2) {
+		console.log("/serviceproviders result2:"+result2);
+    	res.send(result2);
+	}, function(err2) {
+		console.log("/serviceproviders err2:"+err2);
+		res.send(err2);
+
+	}); 
+
 });
 
-
-
 function getUserData(useridParam){
-	// console.log("inside getUserData useridParam:"+useridParam);
+	console.log("inside getUserData useridParam:"+useridParam);
 
 	return new Promise( function( resolve, reject ) {
 
@@ -124,12 +132,10 @@ function getUserData(useridParam){
 			userId:useridParam
 		}).then(function(result){
 			// console.log("getUserData result",JSON.stringify(result));
-			// tmpDbPassword =
 			resolve(result);
 
 		}), function(err2) {
 			// console.log("inside getUserData  err2:"+err2);
-					//reject("serviceTypes function  failed:"+err);
 			reject("getUserData failed");
 		};
 
@@ -138,12 +144,11 @@ function getUserData(useridParam){
 } // end of - function getUserData
 
 //getting data from serviceproviders collection
-router.get('/:serviceName',function(req,res){
+router.get('/providers/:serviceName',function(req,res){
 
 	console.log("router get",req.params);
     var serviceName = req.params.serviceName.toLowerCase();
 	serviceName = serviceName.replace(/ /g, '');
-
 	serviceProviders.find({
 		serviceName:serviceName
 
@@ -151,6 +156,8 @@ router.get('/:serviceName',function(req,res){
 		//console.log("results",results);
 		console.log("err",err);
 		res.json(results);
+
+
 	});
 });
 
