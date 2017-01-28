@@ -1,5 +1,8 @@
 import React,{Component} from 'react'
 import axios from 'axios'
+import bcrypt from 'bcryptjs';
+// console.log(bcrypt);
+
 export default class SigninForm extends Component {
 	constructor(props){
 		super(props);
@@ -10,14 +13,26 @@ export default class SigninForm extends Component {
 		this.onChange = this.onChange.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
 	}
+
 	onChange(e){
 		this.setState({ [e.target.name]:e.target.value});
-
 	}
+
 	onSubmit(e) {
 		e.preventDefault();
-		//console.log(this.state);
-		axios.post('api/users',{user:this.state});
+		axios.post('api/users',{user:this.state})
+		.then((response) => {
+			if(response.data.success) {
+				// do whatever you want to do
+				console.log('correct password')
+			} else {
+				// message with wrong password
+				console.log('wrong password')
+			}
+		})
+		.catch((error) => {
+			console.log(error);
+		})
 	}
 
 	render() {

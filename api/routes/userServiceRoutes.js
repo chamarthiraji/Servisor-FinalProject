@@ -13,7 +13,7 @@ var serviceTypeId;
 var tmpDbPassword;
 
 router.post('/users', function(req,res){
-	console.log("userdata from post 2",req.body);
+	// console.log("userdata from post 2",req.body);
 	var userid=req.body.user.userid;
 	var username=req.body.user.username;
 	var password=req.body.user.password;
@@ -29,9 +29,28 @@ router.post('/users', function(req,res){
 		if (result[0]) {
 			// console.log("user with userId:"+userid+
 				// ", already exists - db userid:"+result[0].userId);
-			res.send({inserted:false,
-				message:"user with userId:"+userid+
-				", already exists.. try to register with another user id"});
+			// res.send({inserted:false,
+			// 	message:"user with userId:"+userid+
+			// 	", already exists.. try to register with another user id"});
+
+				var currentUser = req.body.user.username;
+		 		userData.findOne({'userName': currentUser}, 'userName passWord', function(err, user) {
+					if(err) throw err;
+						bcrypt.compare(req.body.user.password, user.passWord, function(err, result) {
+							console.log(result)
+							if(result === true) {
+									res.json({
+										success: true,
+								});
+							} else {
+								res.json({
+									success: false
+								})
+							}
+					});
+
+				})
+
 		} else {
 			bcrypt.genSalt(10, function(err, salt) {
     		bcrypt.hash(password, salt, function(err, hash) {
@@ -68,6 +87,18 @@ router.post('/users', function(req,res){
 	// console.log("hello end from /users");
 
 });
+
+// function findExistingUser() {
+// 	router.get('/existingUser/:username', function(req, res) {
+// 		var currentUser = req.params.username;
+// 		userData.findOne({'userName': currentUser}, 'userName passWord', function(err, user) {
+// 			console.log(user);
+// 			if(err) throw err;
+// 			res.send({'pass': user.passWord})
+// 		})
+// 	})
+// }
+
 
 //inserting data into "serviceProviders" Schema
 router.post('/serviceproviders',function(req,res){
@@ -115,12 +146,13 @@ router.get('/:serviceName',function(req,res){
 
 	serviceProviders.find({
 		serviceName:serviceName
-		
+
 	}, (err, results) => {
 		//console.log("results",results);
 		console.log("err",err);
 		res.json(results);
 	});
 });
+
 
 module.exports = router;
