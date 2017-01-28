@@ -149,17 +149,20 @@ router.get('/providers/:serviceName',function(req,res){
 	console.log("router get",req.params);
     var serviceName = req.params.serviceName.toLowerCase();
 	serviceName = serviceName.replace(/ /g, '');
-	serviceProviders.find({
-		serviceName:serviceName
 
-	}, (err, results) => {
-		//console.log("results",results);
-		console.log("err",err);
-		res.json(results);
+	console.log("serviceName:"+serviceName);
 
-
+	serviceProviders.find().populate('userDataRefId')
+	.exec(function(error, serviceProviderResults) {
+		if (error) {
+			console.log("/providers/:serviceName error:"+error);
+		}
+		// Otherwise, send the doc to the browser as a json object
+		else {
+			console.log(" /providers/:serviceName serviceProviderResults:"+serviceProviderResults);
+			res.json(serviceProviderResults);
+		}
 	});
 });
-
 
 module.exports = router;
