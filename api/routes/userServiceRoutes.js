@@ -144,15 +144,46 @@ function getUserData(useridParam){
 } // end of - function getUserData
 
 //getting data from serviceproviders collection
-router.get('/providers/:serviceName',function(req,res){
+//router.get('/providers/:serviceName',function(req,res){
+router.post('/providers',function(req,res){
+	console.log("providers req.body",req.body);
+	//console.log("router get",req.params);
+    //var serviceName = req.params.serviceName.toLowerCase();
+	//serviceName = serviceName.replace(/ /g, '');
 
-	console.log("router get",req.params);
-    var serviceName = req.params.serviceName.toLowerCase();
-	serviceName = serviceName.replace(/ /g, '');
+	//console.log("serviceName:"+serviceName);
+	console.log("serviceName:", req.body.serviceName);
+	var tempSearchOptions = {};
+	tempSearchOptions["path"]="userDataRefId";
+	var tmpServiceProviderFilters = {};
 
-	console.log("serviceName:"+serviceName);
+	if (req.body.serviceName) {
+		console.log("inside serviceName");
+		tmpServiceProviderFilters["serviceName"] = 
+			req.body.serviceName.toLowerCase()	;
+	}
 
-	serviceProviders.find().populate('userDataRefId')
+	if (req.body.specializationName) {
+		console.log("inside specializationName");
+		tmpServiceProviderFilters["specializationName"] =
+			req.body.specializationName.toLowerCase();
+	}
+
+	if (req.body.userId) {
+		console.log("inside userId");
+		tempSearchOptions["match"]={userid:
+			req.body.userId.toLowerCase()};
+	}
+
+	// this work s fine
+	// tempSearchOptions["match"]={userId:"raji"};
+	//tempSearchOptions["match"]={ _id: "588e6ab3868755085c388cab"};
+
+	console.log("tempSearchOptions:"+tempSearchOptions);
+	console.log("tempSearchOptions json:"+
+			JSON.stringify(tempSearchOptions));
+	//serviceProviders.find().populate('userDataRefId')
+	serviceProviders.find(tmpServiceProviderFilters).populate(tempSearchOptions)
 	.exec(function(error, serviceProviderResults) {
 		if (error) {
 			console.log("/providers/:serviceName error:"+error);
