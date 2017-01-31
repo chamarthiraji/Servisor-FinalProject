@@ -36,11 +36,11 @@ export default class RigisterForm extends Component {
 
 	onSubmit(e) {
 		e.preventDefault();
-		// console.log("hi user input data: ",this.state);
+		console.log("hi user input data: ",this.state);
 		var x = this;
 		axios.post('api/users',{user:this.state})
 		.then(function(result){
-			// console.log('result', result)
+			 console.log('register form axios result', result)
 			
 			tmpUserRegisteredStatus = result.data.inserted;
  			tmpUserRegisteredMsg = result.data.message;
