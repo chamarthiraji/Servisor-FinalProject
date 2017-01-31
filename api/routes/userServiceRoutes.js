@@ -12,7 +12,7 @@ var serviceTypeId;
 var tmpDbPassword;
 
 router.post('/users', function(req,res){
-	// console.log("userdata from post 2",req.body);
+	console.log("userdata from post 2",req.body);
 	var userid=req.body.user.userid;
 	var username=req.body.user.username;
 	var password=req.body.user.password;
@@ -20,30 +20,34 @@ router.post('/users', function(req,res){
 	var email=req.body.user.email;
 	var image=req.body.user.image;
 	var about=req.body.user.about;
+	console.log("userid",userid);
+	console.log("password",password);
 
 	getUserData(userid)
 	.then(function(result){
 		// console.log("getUserData final result",JSON.stringify(result));
-		// console.log("getUserData final result 2:"+result[0]);
+		 console.log("getUserData final result 2:"+result[0]);
 		if (result[0]) {
 			// console.log("user with userId:"+userid+
 				// ", already exists - db userid:"+result[0].userId);
 			// res.send({inserted:false,
 			// 	message:"user with userId:"+userid+
 			// 	", already exists.. try to register with another user id"});
-
-				var currentUser = req.body.user.username;
-		 		userData.findOne({'userName': currentUser}, 'userName passWord', function(err, user) {
+				var currentUser = req.body.user.userid;
+				//var currentUser = req.body.user.username;
+		 		userData.findOne({'userId': currentUser}, 'userId passWord', function(err, user) {
 					if(err) throw err;
 						bcrypt.compare(req.body.user.password, user.passWord, function(err, result) {
-							console.log(result)
+							console.log("bcrypt.compare",result);
 							if(result === true) {
 									res.json({
 										success: true,
+										message: "logged in successfully "
 								});
 							} else {
 								res.json({
-									success: false
+									success: false,
+									message: "Password Incorrect "
 								})
 							}
 					});
@@ -57,7 +61,7 @@ router.post('/users', function(req,res){
 		        	userData.create({
 		        		userId:userid,
 						userName:username,
-						passWord:hash,
+						password:hash,
 						phoneNo:phonenum,
 						email:email,
 						image:image,
