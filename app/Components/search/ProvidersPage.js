@@ -15,6 +15,7 @@ export default class ProvidersPage extends Component {
 				specializationName : undefined
 			}
 			this.serviceSelect = this.serviceSelect.bind(this);
+			this.specializationSelect = this.specializationSelect.bind(this);
 			this.getProviderData = this.getProviderData.bind(this);
 	}
 
@@ -51,12 +52,30 @@ export default class ProvidersPage extends Component {
 
 	}
 
+	specializationSelect (eventKey){
+	 	
+	 	console.log("specializationName evtKey",eventKey);
+	 	
+
+	 	var newState = this.state;
+		// console.log('state', newState);
+		newState["specializationName"]=eventKey;
+		this.setState(newState);
+
+		this.getProviderData();
+
+	}
+
 	render() {
 		return(
 			<div className="jumbotron">
 				<ButtonGroup justified>
-				    <Button href="#">Left</Button>
-				    <Button href="#">Middle</Button>
+				    <DropdownButton  onSelect={this.specializationSelect} title="Search by Specialization" id="bg-justified-dropdown">
+				      <MenuItem eventKey="math">Math</MenuItem>
+				      <MenuItem eventKey="English">English</MenuItem>
+				      <MenuItem eventKey="veg">Vegitarian</MenuItem>
+				    </DropdownButton>
+				    
 				    <DropdownButton  onSelect={this.serviceSelect} title="Search by Service" id="bg-justified-dropdown">
 				      <MenuItem eventKey="Catering">Catering</MenuItem>
 				      <MenuItem eventKey="Food">Food</MenuItem>

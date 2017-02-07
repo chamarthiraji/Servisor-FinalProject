@@ -1,15 +1,48 @@
 const express = require('express');
 const router = express.Router();
+var nodemailer =require('nodemailer');
+var emailDetails =require('../../emailDetails');
 
 var serviceTypes = require('../../api/models/serviceTypes');
 var serviceProviders = require('../../api/models/serviceProviders');
 var userData = require('../../api/models/userData');
 var bcrypt = require('bcryptjs');
 
-//var {ObjectId} = require('mongodb'); // or ObjectID
-
 var serviceTypeId;
 var tmpDbPassword;
+
+router.post('/sendmail',function(req,res){
+	console.log("sendmail  req.body",req.body);
+
+	// create reusable transporter object using the default SMTP transport
+		 let transporter = nodemailer.createTransport({
+		    service: 'gmail',
+		    auth: {
+		        user: emailDetails.email,
+		        pass: emailDetails.pwd
+		    }
+		});
+		
+
+
+		// setup email data with unicode symbols
+		var mailOptions = {
+		    from: req.body.customerEmail, // sender address
+		    to: req.body.providerEmail, // list of receivers
+		    subject: req.body.subject, // Subject line
+		    text: req.body.message // plain text body
+		    
+		};
+
+		// send mail with defined transport object
+		transporter.sendMail(mailOptions, (error, info) => {
+		    if (error) {
+		        return console.log(error);
+		    }
+		    console.log('Message %s sent: %s', info.messageId, info.response);
+		});
+
+})
 
 router.post('/users', function(req,res){
 	console.log("userdata from post 2",req.body);
@@ -40,9 +73,9 @@ router.post('/users', function(req,res){
 						bcrypt.compare(req.body.user.password, user.passWord, function(err, result) {
 							console.log("bcrypt.compare",result);
 							if(result === true) {
-									res.json({
-										success: true,
-										message: "logged in successfully "
+								res.json({
+									success: true,
+									message: "logged in successfully "
 								});
 							} else {
 								res.json({
@@ -199,5 +232,7 @@ router.post('/providers',function(req,res){
 		}
 	});
 });
+
+
 
 module.exports = router;

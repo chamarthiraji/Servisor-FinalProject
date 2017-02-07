@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import EmailModal from '../EmailModal';
 
 export default class ProvidersListPage extends Component {
 	constructor(props){
@@ -9,29 +10,30 @@ export default class ProvidersListPage extends Component {
 	render() {
 		return (
 			<div>
-					{
-						(this.props.provider.userDataRefId) &&
+				{
+					(this.props.provider.userDataRefId) &&
 
-						<li className="well">
-							<p>{this.props.provider.userName}</p>
+					<li className="well">
+						<p>{this.props.provider.userName}</p>
 
-							<p>{this.props.provider.serviceName}</p>
+						<p>{this.props.provider.serviceName}</p>
 
-							<p>{this.props.provider.specializationName}</p>
+						<p>{this.props.provider.specializationName}</p>
 
-							<p>{this.props.provider.userDataRefId.userId}</p>
+						<p>{this.props.provider.userDataRefId.userId}</p>
 
-							<p>{this.props.provider.userDataRefId.email}</p>
+						<p>{this.props.provider.userDataRefId.email}</p>
+						<EmailModal  providerEmail={this.props.provider.userDataRefId.email}/>
+
+						{
+							/* comment
+
 							
-
-							{
-								/* comment
-
-								
-							 */
-							}
-						</li>
-					}
+						 */
+						}
+					</li>
+				}
 			</div>
-			)};
+		)
+	};
 }				
