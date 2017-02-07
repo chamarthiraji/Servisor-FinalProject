@@ -1,21 +1,30 @@
 import React,{Component} from 'react';
 import axios from 'axios';
 import bcrypt from 'bcryptjs';
-// console.log(bcrypt);
+
+import AfterSignInPage from './AfterSignInPage';
+import Navigationbar from '../Navigationbar';
 var tempMessage;
 var tempSuccess2;
+
 export default class SigninForm extends Component {
 	constructor(props){
 		super(props);
+		console.log("SigninForm props:"+JSON.stringify(props));
+
 		this.state={
 			userid:'',
 			password:'',
 			success2:undefined,
-			message:''
+			message:'',
+			isLoggedIn: false
 		}
+
 		this.onChange = this.onChange.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
 		this.setUserSigninState = this.setUserSigninState.bind(this);
+
+		console.log(' SigninForm final state', this.state);
 	}
 
 	onChange(e){
@@ -24,6 +33,7 @@ export default class SigninForm extends Component {
 
 	onSubmit(e) {
 		e.preventDefault();
+
 		console.log("inside signin form this.state",this.state);
 		var x = this;
 		axios.post('api/users',{user:this.state})
@@ -32,20 +42,9 @@ export default class SigninForm extends Component {
 
 			tempMessage = response.data.message;
 			tempSuccess2 = response.data.success;
+
 			x.setUserSigninState();
 
-
-			/*if(response.data.success) {
-				// do whatever you want to do
-				console.log('correct password response ',response.data.success);
-				this.state[message] = response.data.message;
-				this.state[success] = response.data.success;
-			} else {
-				// message with wrong password
-				console.log('wrong password')
-				this.state[message] = response.data.message;
-				this.state[success] = response.data.success;
-			} */
 		})
 		.catch((error) => {
 			console.log(error);
@@ -58,7 +57,12 @@ export default class SigninForm extends Component {
 		// console.log('state', newState);
 		newState["message"]=tempMessage;
 		newState["success2"] = tempSuccess2;
-		//newState["mongoId"] = tmpmongoId;
+		newState["success2"] = tempSuccess2;
+		if (tempSuccess2) {
+		 newState["isLoggedIn"]= true;
+		 this.props.setLoggedIn();
+		}
+		
 		this.setState(newState);
 		console.log('setUserSigninState newState', newState);
 
@@ -77,7 +81,9 @@ export default class SigninForm extends Component {
 
 			{ (this.state.success2 === true)	 &&
 				<div>
-					{this.state.message}
+					
+					{this.state.message} 
+					<AfterSignInPage data={this.state} />
 
 				</div>
 			}	
