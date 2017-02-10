@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal,Button } from 'react-bootstrap';
+import { Modal,Button,ButtonToolbar } from 'react-bootstrap';
 import ModalForm from './ModalForm';
 
 export default class EmailModal extends Component {
@@ -28,7 +28,7 @@ export default class EmailModal extends Component {
 		<div>
 	        <Button
 	          bsStyle="primary"
-	          bsSize="large"
+	          bsSize="small"
 	          onClick={this.open}
 	        >
 	         Send Message 
@@ -42,7 +42,9 @@ export default class EmailModal extends Component {
 	          	<ModalForm  email={this.props.providerEmail}/> 
 	          </Modal.Body>
 	          <Modal.Footer>
-	            <Button onClick={this.close}>Close</Button>
+	          	<ButtonToolbar>
+	            	<Button bsStyle="primary" bsSize="xsmall" onClick={this.close}>Close</Button>
+	            </ButtonToolbar>
 	          </Modal.Footer>
 	        </Modal>
         </div>

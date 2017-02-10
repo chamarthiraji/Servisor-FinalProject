@@ -68,7 +68,7 @@ export default class ProvidersPage extends Component {
 
 	render() {
 		return(
-			<div className="jumbotron">
+			<div className="">
 				<ButtonGroup justified>
 				    <DropdownButton  onSelect={this.specializationSelect} title="Search by Specialization" id="bg-justified-dropdown">
 				      <MenuItem eventKey="math">Math</MenuItem>

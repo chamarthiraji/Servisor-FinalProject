@@ -5,6 +5,8 @@ var emailDetails =require('../../emailDetails');
 
 var serviceTypes = require('../../api/models/serviceTypes');
 var serviceProviders = require('../../api/models/serviceProviders');
+var Reviews = require('../../api/models/Review');
+
 var userData = require('../../api/models/userData');
 var bcrypt = require('bcryptjs');
 
@@ -39,8 +41,42 @@ router.post('/sendmail',function(req,res){
 		    if (error) {
 		        return console.log(error);
 		    }
+		    alert("message sent successfully");
 		    console.log('Message %s sent: %s', info.messageId, info.response);
 		});
+
+})
+
+router.post('/reviews',function(req,res){
+	console.log("reviews req.body",req.body);
+	var review=[];
+	review.push(req.body.review) ;
+	var _id = req.body.userid;
+	//serviceProviders.find().populate('userDataRefId')
+	serviceProviders.findById(_id, (err, serviceProviders) => {
+
+         if(err) {
+             return res.status(500).json({
+                 title: `No provider was found by id: ${id}`,
+                 error: err
+             })
+         }
+         else {
+             serviceProviders.reviews.push(req.body.review);
+             console.log(review)
+             serviceProviders.save(function (err, result) {
+                 if(err) {
+                     return res.status(500).json({
+                         title: 'An error occurred when uploading a comment',
+                         error: err
+                     })
+                 }
+                 console.log("result reviews",result);
+                 res.json(result);
+             });
+         }
+     });
+
 
 })
 
