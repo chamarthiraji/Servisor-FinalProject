@@ -22,6 +22,9 @@ export default class ModalForm extends Component {
 	onChange(e){
 		this.setState({ [e.target.name]:e.target.value});
 	}
+	showAlert() {
+		alert("message sent");
+	}
 
 	onSubmit(e){
 		e.preventDefault();
@@ -81,7 +84,7 @@ export default class ModalForm extends Component {
 					/>
 				</div>
 				<div className="form-group">
-						<button className="btn btn-primary btn-lg">
+						<button className="btn btn-primary btn-lg" onClick={this.showAlert}>
 							Submit
 						</button>
 				</div>

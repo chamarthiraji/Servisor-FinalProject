@@ -18,8 +18,11 @@ var serviceProvidersSchema = new Schema({
     },
     rating: {
         type:"string"
+    },
+    reviews:{
+        type: Array
     }
-  
+        
 });
 
 //here we are creating serviceProviders model using serviceProvidersSchema schema

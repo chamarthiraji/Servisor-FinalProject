@@ -9,6 +9,8 @@ import RegisterPage from '../components/register/RegisterPage'
 import SearchPage from '../components/search/SearchPage'
 import ProvidersPage from '../components/search/ProvidersPage'
 import Logout from '../components/Logout'
+import Reviews from '../components/search/Reviews'
+
 
  /*<Route  path="providers/:serviceName" */
 module.exports = (
@@ -19,6 +21,7 @@ module.exports = (
     	<Route path="register" component={RegisterPage} />
     	<Route path="searchPage" component={SearchPage} />
       <Route path="logout" component={Logout} />
+      <Route path="review" component={Reviews} />
 
      
     	<Route  path="providers" 

@@ -25,7 +25,10 @@ var userDataSchema = new Schema({
     },
     image:{
         type:String
-    }
+    },
+    review:[{
+        type:String
+    }]
 });
 
 //here we are creating serviceProviders model using serviceProvidersSchema schema

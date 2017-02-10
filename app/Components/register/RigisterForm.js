@@ -20,7 +20,9 @@ export default class RigisterForm extends Component {
 			about:'',
 			userRegisteredStatus:undefined,
 			userRegisteredMsg:'',
-			mongoId:undefined
+			mongoId:undefined,
+			file: '',
+			imagePreviewUrl: ''
 		}
 
 		this.onChange = this.onChange.bind(this);
@@ -30,9 +32,10 @@ export default class RigisterForm extends Component {
 
 	onChange(e){
 		this.setState({ [e.target.name]:e.target.value});
-		// console.log('state', this.state);
+		console.log('state', this.state);
 	}
 
+	 
 
 	onSubmit(e) {
 		e.preventDefault();
@@ -146,7 +149,7 @@ export default class RigisterForm extends Component {
 								name="image"
 								value={this.state.image}
 								onChange={this.onChange}
-								className="form-control"
+								className="fileInput"
 							/>
 						</div>
 						<div className="form-group">
