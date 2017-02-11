@@ -2,9 +2,6 @@ import React,{Component} from 'react';
 import { Link }  from 'react-router';
 import Navigationbar from './Navigationbar';
 
-
-
-
 export default class Logout extends Component {
 	
 	render() {
