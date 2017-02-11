@@ -16,8 +16,7 @@ export default class Main extends Component {
 		const {isLoggedIn} = this.state;
 		console.log("isLoggedIn", isLoggedIn);
 		this.setState({ isLoggedIn: !isLoggedIn })
-	}	
-
+	}
 
 	render() {
 
