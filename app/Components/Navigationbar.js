@@ -24,7 +24,7 @@ export default class Navigationbar extends  React.Component {
                		data={this.state}
                		>Sign In</Link></li>
                <li><Link to="/register">Register</Link></li>
-               <li><FbLogin /></li>
+              {/* <li><FbLogin /></li>*/}
 
            </ul>
              

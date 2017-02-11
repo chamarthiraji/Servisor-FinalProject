@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import axios from 'axios';
 import SearchPage from '../search/SearchPage';
+import SigninPage from '../signin/SigninPage';
 
 var tmpUserRegisteredStatus;
 var tmpUserRegisteredMsg;
@@ -70,7 +71,7 @@ export default class RigisterForm extends Component {
 			<div>
 				{ this.state.userRegisteredStatus === false &&
 					<div className="form-group">
-					 User already exists hello .
+					 User already exists  .
 					 { this.state.userRegisteredMsg }
 
 					</div>
@@ -78,8 +79,7 @@ export default class RigisterForm extends Component {
 
 				{ (this.state.userRegisteredStatus === true) &&
 					<div className="form-group">
-					 hi User registered successfully - {this.state.mongoId}.
-					 { this.state.userRegisteredMsg }
+					  
 					 <SearchPage data={this.state.mongoId} />
 					</div>
 				}
@@ -87,9 +87,9 @@ export default class RigisterForm extends Component {
 				{ (this.state.userRegisteredStatus === undefined ||
 					this.state.userRegisteredStatus === false) &&
 
-
+					<div className="registerForm ">
 					<form onSubmit={this.onSubmit}>
-						<h1>Register in our community!</h1>
+						<h3>Register in our community!</h3>
 						<div className="form-group">
 							<label className="control-label">UserID</label>
 							<input
@@ -143,17 +143,17 @@ export default class RigisterForm extends Component {
 						</div>
 						<div className="form-group">
 							<label className="control-label">
-							Image</label>
+							Image Url</label>
 							<input
 								type="text"
 								name="image"
 								value={this.state.image}
 								onChange={this.onChange}
-								className="fileInput"
+								className="form-control"
 							/>
 						</div>
 						<div className="form-group">
-							<label className="control-label">Describe</label>
+							<label className="control-label">About</label>
 							<input
 								type="text"
 								name="about"
@@ -164,11 +164,12 @@ export default class RigisterForm extends Component {
 						</div>
 
 						<div className="form-group">
-							<button className="btn btn-primary btn-lg">
+							<button className="btn btn-primary btn-md">
 								Register
 							</button>
 						</div>
 					</form>
+					</div>
 				}
 			</div>
 		);

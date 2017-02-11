@@ -27,6 +27,7 @@ export default class Main extends Component {
 					<Navigationbar isLoggedIn={this.state.isLoggedIn}
 								   setLoggedIn={this.setLoggedIn}
 					/>
+					
 					{this.props.children && React.cloneElement(this.props.children, {
               setLoggedIn: this.setLoggedIn
             })} 
