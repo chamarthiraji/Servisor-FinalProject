@@ -11,7 +11,6 @@ import ProvidersPage from '../components/search/ProvidersPage'
 import Logout from '../components/Logout'
 import Reviews from '../components/search/Reviews'
 
-
  /*<Route  path="providers/:serviceName" */
 module.exports = (
   <Router history={browserHistory}>
