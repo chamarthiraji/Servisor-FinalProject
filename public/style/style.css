@@ -1,0 +1,150 @@
+/*
+body{
+	height: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat:no-repeat;
+    /*background: #70bg32;
+    
+    background: -webkit-linear-gradient( to left top, blue, red);
+    background: -moz-linear-gradient( to left top, blue, red);
+    background: -ms-linear-gradient( to left top, blue, red);
+    background: -o-linear-gradient( to left top, blue, red);
+    background: linear-gradient( to left top, blue, red);
+background: #360033; /* fallback for old browsers 
+background: -webkit-linear-gradient(to left, #360033 , #0b8793); /* Chrome 10-25, Safari 5.1-6 
+background: linear-gradient(to left, #360033 , #0b8793); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ 
+}*/
+html{
+  color:#000000;
+}
+body { 
+  background: url(../images/nature2.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+}
+ {
+        font-family: 'Playfair', serif;
+        font-size: 48px;
+      }
+.btn-default {
+  background-color: #FEB911;
+}
+
+
+.providerList{
+    width:50%;
+
+}
+.center {
+    top:30%;
+    left:35%;
+    text-align: center;
+     position: absolute;
+    
+    }
+h2 {
+    
+    font-family: 'Audiowide',  serif;
+        font-size: 75px;
+            font-weight: 600;
+            
+
+}
+div.firstPage{
+   margin-left: auto;
+    margin-right: auto;
+    width: 6em;
+    top: 120%;
+    left: 90%;
+  
+
+}
+.navbar {
+   background-color: transparent;
+   background: transparent;
+   border-color: transparent;
+}
+
+.navbar-default .navbar-nav>li>a {
+     color: black;} 
+.navbar-default .navbar-brand {
+  font-family: 'Audiowide',  serif;
+  font-weight: 600;
+  color: black;
+  font-size: 30px;
+
+
+}
+.signInForm{
+  position: absolute;
+    top: 80px;
+    right: 140px;
+    width: 200px;
+    
+   
+   
+}
+.registerForm,{
+  position: absolute;
+  right: 160px;
+    top: 80px;
+    width: 200px;
+
+}
+.registerPage2{
+  position: absolute;
+  right: 140px;
+    top: 100px;
+
+}
+.well{
+  background-color:#FED57B;
+}
+
+#message1,#message2{
+  position: absolute;
+  right: 140px;
+  top: 70px;
+  color:red;
+  
+
+}
+.btn-group-justified>.btn-group .btn {
+  background-color: #FEB911;
+  }
+h3,p{
+  text-align: center;
+}
+form{
+ /* width: 200%;*/
+
+
+}
+.btn-primary{
+  background-color:black;
+}
+
+div.firstPage {
+    height: 10em;
+    position: relative }
+div.firstPage h2 {
+    margin: 0;
+    
+    position: absolute;
+    top: 120%;
+    left: 90%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%) }
+    /*left: 0;
+    line-height: 200px;
+    margin: auto;
+    margin-top: -100px;
+    position: absolute;
+    top: 50%;
+    width: 110%; */

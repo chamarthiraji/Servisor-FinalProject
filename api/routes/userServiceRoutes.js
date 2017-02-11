@@ -17,40 +17,52 @@ router.post('/sendmail',function(req,res){
 	console.log("sendmail  req.body",req.body);
 
 	// create reusable transporter object using the default SMTP transport
-		 let transporter = nodemailer.createTransport({
-		    service: 'gmail',
-		    auth: {
-		        user: emailDetails.email,
-		        pass: emailDetails.pwd
-		    }
-		});
-		
+	 let transporter = nodemailer.createTransport({
+	    service: 'gmail',
+	    auth: {
+	        user: emailDetails.email,
+	        pass: emailDetails.pwd
+	    }
+	});
 
+	// setup email data with unicode symbols
+	var mailOptions = {
+	    from: req.body.customerEmail, // sender address
+	    to: req.body.providerEmail, // list of receivers
+	    subject: req.body.subject, // Subject line
+	    text: req.body.message // plain text body
+	    
+	};
 
-		// setup email data with unicode symbols
-		var mailOptions = {
-		    from: req.body.customerEmail, // sender address
-		    to: req.body.providerEmail, // list of receivers
-		    subject: req.body.subject, // Subject line
-		    text: req.body.message // plain text body
-		    
-		};
-
-		// send mail with defined transport object
-		transporter.sendMail(mailOptions, (error, info) => {
-		    if (error) {
-		        return console.log(error);
-		    }
-		    alert("message sent successfully");
-		    console.log('Message %s sent: %s', info.messageId, info.response);
-		});
+	// send mail with defined transport object
+	transporter.sendMail(mailOptions, (error, info) => {
+	    if (error) {
+	        return console.log(error);
+	    }
+	    alert("message sent successfully");
+	    console.log('Message %s sent: %s', 
+	    	info.messageId, info.response);
+	});
 
 })
 
+router.get('/getReviews/:userid', (req, res) => {
+//  console.log("router comments get",req.params);
+    var id = req.params.userid;
+    id = id.replace(/ /g, '');
+
+    serviceProviders.find({
+        _id: id
+    }, (err, results) => {
+    	console.log("results",results);
+        res.json(results);
+    });
+});
+
 router.post('/reviews',function(req,res){
-	console.log("reviews req.body",req.body);
+	console.log("/reviews req.body",req.body);
 	var review=[];
-	review.push(req.body.review) ;
+	review.push(req.body.userReview) ;
 	var _id = req.body.userid;
 	//serviceProviders.find().populate('userDataRefId')
 	serviceProviders.findById(_id, (err, serviceProviders) => {
@@ -62,12 +74,16 @@ router.post('/reviews',function(req,res){
              })
          }
          else {
-             serviceProviders.reviews.push(req.body.review);
-             console.log(review)
+         	console.log("/reviews serviceProviders.reviews:"+
+         			serviceProviders.reviews);
+             serviceProviders.reviews.push(req.body.userReview);
+             console.log("/reviews serviceProviders.reviews 2:"+
+             	review);
              serviceProviders.save(function (err, result) {
                  if(err) {
                      return res.status(500).json({
-                         title: 'An error occurred when uploading a comment',
+                         title: 
+                         'An error occurred when uploading a comment',
                          error: err
                      })
                  }
@@ -76,7 +92,6 @@ router.post('/reviews',function(req,res){
              });
          }
      });
-
 
 })
 
@@ -97,21 +112,26 @@ router.post('/users', function(req,res){
 		// console.log("getUserData final result",JSON.stringify(result));
 		 console.log("getUserData final result 2:"+result[0]);
 		if (result[0]) {
-			// console.log("user with userId:"+userid+
-				// ", already exists - db userid:"+result[0].userId);
-			// res.send({inserted:false,
-			// 	message:"user with userId:"+userid+
-			// 	", already exists.. try to register with another user id"});
-				var currentUser = req.body.user.userid;
-				//var currentUser = req.body.user.username;
-		 		userData.findOne({'userId': currentUser}, 'userId passWord', function(err, user) {
+			var currentUser = req.body.user.userid;
+			//var currentUser = req.body.user.username;
+	 		userData.findOne({'userId': currentUser}, 
+	 			'userId passWord', 
+	 			function(err, user) {
 					if(err) throw err;
-						bcrypt.compare(req.body.user.password, user.passWord, function(err, result) {
+					console.log("user password:"+
+						req.body.user.password);
+					console.log("db password:"+
+						user.passWord);
+					console.log("Data from db user:"+user);
+					bcrypt.compare(req.body.user.password, 
+						user.passWord, 
+						function(err, result) {
 							console.log("bcrypt.compare",result);
 							if(result === true) {
 								res.json({
 									success: true,
-									message: "logged in successfully "
+									message: 
+										"logged in successfully "
 								});
 							} else {
 								res.json({
@@ -119,9 +139,10 @@ router.post('/users', function(req,res){
 									message: "Password Incorrect "
 								})
 							}
-					});
-
-				})
+						}
+					);
+				}
+			)
 
 		} else {
 			bcrypt.genSalt(10, function(err, salt) {
@@ -130,23 +151,26 @@ router.post('/users', function(req,res){
 		        	userData.create({
 		        		userId:userid,
 						userName:username,
-						password:hash,
+						passWord:hash,
 						phoneNo:phonenum,
 						email:email,
 						image:image,
 						about:about
 	        		}).then(function(result2) {
+	        			console.log("/users create result2:"+
+	        				result2);
 		        		res.send({inserted:true,
 								dbId:result2._id,
 								message:"user with userId:"+userid+
-								" registered in the system"
+								" registered in the System"
 							});
 		        	}, function(err2) {
 							// console.log("inside insertserviceType create err2:"+err2);
 							//reject("serviceTypes function  failed:"+err);
 							res.send({inserted:false,
-								message:"Error while inserting user with userId:"+
-								userid+",  err2:"+err2
+								message:
+									"Error while inserting user with userId:"+
+									userid+",  err2:"+err2
 							});
 					}); 
     			});
@@ -160,18 +184,6 @@ router.post('/users', function(req,res){
 	});
 
 });// end of users
-
-// function findExistingUser() {
-// 	router.get('/existingUser/:username', function(req, res) {
-// 		var currentUser = req.params.username;
-// 		userData.findOne({'userName': currentUser}, 'userName passWord', function(err, user) {
-// 			console.log(user);
-// 			if(err) throw err;
-// 			res.send({'pass': user.passWord})
-// 		})
-// 	})
-// }
-
 
 //inserting data into "serviceProviders" Schema
 router.post('/serviceproviders',function(req,res){
@@ -220,9 +232,6 @@ function getUserData(useridParam){
 //router.get('/providers/:serviceName',function(req,res){
 router.post('/providers',function(req,res){
 	console.log("providers req.body",req.body);
-	//console.log("router get",req.params);
-    //var serviceName = req.params.serviceName.toLowerCase();
-	//serviceName = serviceName.replace(/ /g, '');
 
 	//console.log("serviceName:"+serviceName);
 	console.log("serviceName:", req.body.serviceName);
@@ -248,10 +257,6 @@ router.post('/providers',function(req,res){
 			req.body.userId.toLowerCase()};
 	}
 
-	// this work s fine
-	// tempSearchOptions["match"]={userId:"raji"};
-	//tempSearchOptions["match"]={ _id: "588e6ab3868755085c388cab"};
-
 	console.log("tempSearchOptions:"+tempSearchOptions);
 	console.log("tempSearchOptions json:"+
 			JSON.stringify(tempSearchOptions));
@@ -268,7 +273,5 @@ router.post('/providers',function(req,res){
 		}
 	});
 });
-
-
 
 module.exports = router;

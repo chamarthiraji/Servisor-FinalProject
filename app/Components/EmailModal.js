@@ -14,40 +14,40 @@ export default class EmailModal extends Component {
 		
 	}
 	 
-	  close() {
-	    this.setState({ showModal: false });
-	  }
+	close() {
+		this.setState({ showModal: false });
+	}
 
-	  open() {
-	    this.setState({ showModal: true });
-	  }
+	open() {
+		this.setState({ showModal: true });
+	}
 
 	
 	render() {
 		return (
-		<div>
-	        <Button
-	          bsStyle="primary"
-	          bsSize="small"
-	          onClick={this.open}
-	        >
-	         Send Message 
-	        </Button>
+			<div>
+		        <Button
+		          bsStyle="primary"
+		          bsSize="small"
+		          onClick={this.open}
+		        >
+		         Send Message 
+		        </Button>
 
-	        <Modal show={this.state.showModal} onHide={this.close}>
-	          <Modal.Header closeButton>
-	            <Modal.Title>Modal heading</Modal.Title>
-	          </Modal.Header>
-	          <Modal.Body>
-	          	<ModalForm  email={this.props.providerEmail}/> 
-	          </Modal.Body>
-	          <Modal.Footer>
-	          	<ButtonToolbar>
-	            	<Button bsStyle="primary" bsSize="xsmall" onClick={this.close}>Close</Button>
-	            </ButtonToolbar>
-	          </Modal.Footer>
-	        </Modal>
-        </div>
-				);
+		        <Modal show={this.state.showModal} onHide={this.close}>
+		          <Modal.Header closeButton>
+		            <Modal.Title>Send Your Email</Modal.Title>
+		          </Modal.Header>
+		          <Modal.Body>
+		          	<ModalForm  email={this.props.providerEmail}/> 
+		          </Modal.Body>
+		          <Modal.Footer>
+		          	<ButtonToolbar>
+		            	<Button bsStyle="primary" bsSize="xsmall" onClick={this.close}>Close</Button>
+		            </ButtonToolbar>
+		          </Modal.Footer>
+		        </Modal>
+	        </div>
+		);
 	}
 }		

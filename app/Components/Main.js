@@ -16,8 +16,7 @@ export default class Main extends Component {
 		const {isLoggedIn} = this.state;
 		console.log("isLoggedIn", isLoggedIn);
 		this.setState({ isLoggedIn: !isLoggedIn })
-	}	
-
+	}
 
 	render() {
 
@@ -27,6 +26,7 @@ export default class Main extends Component {
 					<Navigationbar isLoggedIn={this.state.isLoggedIn}
 								   setLoggedIn={this.setLoggedIn}
 					/>
+					
 					{this.props.children && React.cloneElement(this.props.children, {
               setLoggedIn: this.setLoggedIn
             })} 

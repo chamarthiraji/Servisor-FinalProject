@@ -8,13 +8,16 @@ export default class FirstPage extends Component {
 	
 	render() {
 		return(
-			<div className="jumbotron">
-				<h2>Welcome!!</h2>
-				<Link to="/searchPage">Search</Link>
-				<p></p>
+			<div >
+				
+				<div className="center">
+				<h2 >SERVISOR</h2>
 
+				
+				
 				<Link  to="/providers" >
 					Browse for Providers</Link>
+				</div>	
     		</div>
 		);
 	}

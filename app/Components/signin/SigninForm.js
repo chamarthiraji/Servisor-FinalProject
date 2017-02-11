@@ -71,10 +71,10 @@ export default class SigninForm extends Component {
 	render() {
 		return(
 		<div>	
-		<div>hello {this.state.success2}</div>
+		<div> {this.state.success2}</div>
 			{ (this.state.success2 === false ) &&
 				<div>
-					<p>Please enter correct Password</p>
+					<p id="message1">Please enter correct Password</p>
 					
 				</div>	
 			}	
@@ -91,10 +91,11 @@ export default class SigninForm extends Component {
 			{(this.state.success2 === undefined ||
 				this.state.success2 === false) 
 				&&
-			
+				<div className="signInForm ">
 				<form onSubmit={this.onSubmit}>
-					<h1>Join our community!</h1>
-					<div className="form-group">
+					<h3>SignIn </h3>
+					<div className="row">
+					<div className="form-group ">
 						<label className="control-label">UserID</label>
 						<input
 							type="text"
@@ -104,7 +105,9 @@ export default class SigninForm extends Component {
 							className="form-control"
 						/>
 					</div>
-					<div className="form-group">
+					</div>
+					<div className="row">
+					<div className="form-group   ">
 						<label className="control-label">Password</label>
 						<input
 							type="password"
@@ -114,12 +117,15 @@ export default class SigninForm extends Component {
 							className="form-control"
 						/>
 					</div>
+					</div>
+					
 					<div className="form-group">
-						<button className="btn btn-primary btn-lg">
+						<button className="btn btn-primary btn-md">
 							sign in
 						</button>
 					</div>
 				</form>
+				</div>
 			}
 		</div>	
 		);

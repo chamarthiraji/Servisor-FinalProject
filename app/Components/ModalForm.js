@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { FormGroup, Button, ControlLabel, FormControl } from 'react-bootstrap';
-//import nodemailer from 'nodemailer';
+import { FormGroup, Button, ControlLabel, FormControl } 
+	from 'react-bootstrap';
 
 import axios from 'axios';
-
-
 
 export default class ModalForm extends Component {
 	constructor(props){
@@ -44,11 +42,8 @@ export default class ModalForm extends Component {
 		})
 		.catch((error) => {
 			console.log(error);
-		})	
-
-
+		})
 	}
-
 
 	render() {
 		return (
@@ -64,7 +59,7 @@ export default class ModalForm extends Component {
 					/>
 				</div>
 				<div className="form-group">
-					<label className="control-label">subject</label>
+					<label className="control-label">Subject</label>
 					<input
 						type="text"
 						name="subject"
@@ -74,7 +69,7 @@ export default class ModalForm extends Component {
 					/>
 				</div>
 				<div className="form-group">
-					<label className="control-label">message</label>
+					<label className="control-label">Message</label>
 					<input
 						type="text"
 						name="message"
@@ -84,15 +79,12 @@ export default class ModalForm extends Component {
 					/>
 				</div>
 				<div className="form-group">
-						<button className="btn btn-primary btn-lg" onClick={this.showAlert}>
+						<button className="btn btn-primary btn-md" onClick={this.showAlert}>
 							Submit
 						</button>
 				</div>
 
-
-			</form>
-    
-			    
-			);
+			</form>			    
+		);
 	}	
 }		
