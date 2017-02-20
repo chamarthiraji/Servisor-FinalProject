@@ -15,7 +15,7 @@ router.post('/sendmail',function(req,res){
 	console.log("sendmail  req.body",req.body);
 
 	// create reusable transporter object using the default SMTP transport
-	 let transporter = nodemailer.createTransport({
+	 var transporter = nodemailer.createTransport({
 	    service: 'gmail',
 	    auth: {
 	        user: emailDetails.email,
