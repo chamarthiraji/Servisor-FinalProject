@@ -36,7 +36,7 @@ app.use(bodyParser.urlencoded({
 // Static file support with public folder
 app.use(express.static("public"));
 
-var mongoURI = process.env.MONGODB_URL || "mongodb://localhost/userServices";
+var mongoURI = process.env.MONGODB_URI || "mongodb://localhost/userServices";
 mongoose.connect(mongoURI);
 var db = mongoose.connection;
 
