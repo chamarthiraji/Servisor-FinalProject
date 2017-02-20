@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const nodemailer =require('nodemailer');
+// const nodemailer = require('nodemailer');
+var nodemailer = require('nodemailer-smtp-transport');
 
 var serviceProviders = require('../../api/models/serviceProviders');
 var Reviews = require('../../api/models/Review');
