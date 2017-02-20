@@ -8,8 +8,14 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+<<<<<<< 290bc8d452135db85bd0a3def4dc96893326f737
     "build": "webpack -w",
     "start": "node server.js"
+=======
+    "start": "webpack -w",
+    "poststart": "node server.js",
+    "postinstall": "cd client && npm install"
+>>>>>>> postinstall script added
   },
   "author": "raji",
   "license": "ISC",
