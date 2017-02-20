@@ -18,8 +18,8 @@ router.post('/sendmail',function(req,res){
 	 var transporter = nodemailer.createTransport({
 	    service: 'gmail',
 	    auth: {
-	        user: rajiservisor60@gmail.com,
-	        pass: neeharikanavi
+	        user: 'rajiservisor60@gmail.com',
+	        pass: 'neeharikanavi'
 	    }
 	});
 
