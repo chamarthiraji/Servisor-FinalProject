@@ -10,19 +10,10 @@ var mongoose = require("mongoose");
 var Promise = require("bluebird");
 
 mongoose.Promise = Promise;
-
-var serviceTypes = require('./api/models/serviceTypes');
 //var specializationData = require('./api/models/specializationData');
 var serviceProviders = require('./api/models/serviceProviders');
 var userData = require('./api/models/userData');
 var Review = require('./api/models/Review');
-
-
-// var serviceTypes1 = new serviceTypes({serviceName:"tutoring"});
-// serviceTypes1.save();
-
-// var serviceTypes1 = new serviceTypes({serviceName:"tutoring"});
-// serviceTypes1.save();
 
 // Initialize Express
 var app = express();

@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 var nodemailer =require('nodemailer');
 var emailDetails =require('../../emailDetails');
-
-var serviceTypes = require('../../api/models/serviceTypes');
 var serviceProviders = require('../../api/models/serviceProviders');
 var Reviews = require('../../api/models/Review');
 
